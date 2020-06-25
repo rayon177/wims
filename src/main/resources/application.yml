@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    username: weather
+    password: root
+    url: jdbc:mysql://118.25.108.16:3306/weather
+    driver-class-name: com.mysql.jdbc.Driver
+#    使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+#   在DateSourceProperties 中没有后面的相关属性，默认不起作用，所以标黄了。
+#   需要自己写一个配置类
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  #    schema:
+  #      - classpath:department.sql
+
+
+#mybatis 配置
+mybatis:
+  mapper-locations: classpath:scu/wims/mapper/UserDAOMapper.xml
+  type-aliases-package: scu.wims.entity
+
